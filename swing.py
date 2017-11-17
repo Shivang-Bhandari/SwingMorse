@@ -54,6 +54,17 @@ key = {
 
 reverseKey = {b:a for a,b in key.items()}
 
+def encrypt(string):
+    #generates a string same as the length of the input
+    random = binascii.b2a_hex(os.urandom(len(string)))
+    binString=binascii.hexlify(string.encode())
+    zipp = zip(binString,random)
+    list = ((chr(a^b)) for a,b in zipp)
+    jString = (('').join(list))
+    encoded = jString.encode()
+    encoded = binascii.b2a_hex(encoded)
+    return encoded
+
 def doMorse(string):
     encoded=''
     for letter in string:
@@ -65,4 +76,4 @@ def doMorse(string):
         else:
             error="Invalid Character '"+letter+"' "
             return error
-    return encoded
+    return encrypt(encoded)
