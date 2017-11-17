@@ -57,6 +57,7 @@ reverseKey = {b:a for a,b in key.items()}
 def encrypt(string):
     #generates a string same as the length of the input
     random = binascii.b2a_hex(os.urandom(len(string)))
+    print("The Key is :" +str(random))
     binString=binascii.hexlify(string.encode())
     zipp = zip(binString,random)
     list = ((chr(a^b)) for a,b in zipp)
